@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PQQ - Bài Quyền & Lời Thiệu</title>
+    <title>PQQ - Danh Sách Bài Quyền</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -52,27 +52,10 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             width: 95%;
             margin: 3rem auto;
             flex-grow: 1;
-        }
-
-        /* Khung chứa từng bài quyền */
-        .quan-form-section {
-            margin-bottom: 4rem;
-        }
-
-        .quan-title {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: bold;
         }
 
         /* Bảng hiển thị */
@@ -100,6 +83,7 @@
             background-color: var(--primary-color);
             color: white;
             font-weight: 600;
+            font-size: 1.05rem;
         }
 
         th i {
@@ -110,71 +94,23 @@
         tr:nth-child(even) { background-color: #fdfaf5; }
         tr:hover { background-color: #f0ebd8; }
 
-        /* Nút xem video */
-        .video-btn {
+        /* Nút xem chi tiết (chứa link) */
+        .detail-btn {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             padding: 8px 15px;
             background-color: #c0392b; 
             color: white;
-            border: none;
-            cursor: pointer;
+            text-decoration: none;
             border-radius: 5px;
             font-size: 0.95rem;
             transition: background-color 0.3s;
-            font-family: inherit;
+            font-weight: 500;
         }
 
-        .video-btn:hover {
+        .detail-btn:hover {
             background-color: #922b21;
-        }
-
-        /* ----- GIAO DIỆN CỬA SỔ NỔI (MODAL) XEM VIDEO ----- */
-        .modal {
-            display: none; /* Ẩn mặc định */
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85); /* Nền đen mờ */
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            position: relative;
-            width: 90%;
-            max-width: 800px;
-            background: #000;
-            border-radius: 8px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-        }
-
-        /* Nút tắt video */
-        .close-btn {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: #fff;
-            font-size: 35px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-btn:hover {
-            color: var(--secondary-color);
-        }
-
-        /* Cấu hình khung video trong modal */
-        #modalVideo {
-            width: 100%;
-            max-height: 80vh;
-            border-radius: 8px;
-            display: block;
         }
 
         footer {
@@ -191,122 +127,49 @@
 <body>
 
     <header>
-        <h1>Bài Quyền & Lời Thiệu</h1>
-        <p>Hệ thống chuyên môn và video hướng dẫn chi tiết</p>
+        <h1>Danh Sách Bài Quyền</h1>
+        <p>Hệ thống chuyên môn</p>
     </header>
 
     <div class="container">
         
-        <div class="quan-form-section">
-            <div class="quan-title">
-                <i class="fa-solid fa-yin-yang"></i> Bài Quyền: Lão Hổ Thượng Sơn
-            </div>
-            
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 10%; text-align: center;">STT</th>
-                            <th style="width: 70%;"><i class="fa-solid fa-scroll"></i> Tên Lời Thiệu</th>
-                            <th style="width: 20%; text-align: center;"><i class="fa-solid fa-film"></i> Video</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="text-align: center; font-weight: bold;">1</td>
-                            <td style="font-weight: 500; font-size: 1.1rem; color: var(--primary-color);">Đoạn 1: Bạch Hổ Khởi Động</td>
-                            <td style="text-align: center;">
-                                <button class="video-btn" onclick="openVideo('video-lao-ho-1.mp4')">
-                                    <i class="fa-solid fa-play"></i> Xem Video
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center; font-weight: bold;">2</td>
-                            <td style="font-weight: 500; font-size: 1.1rem; color: var(--primary-color);">Đoạn 1: Chấp thủ khai mã</td>
-                            <td style="text-align: center;">
-                                <button class="video-btn" onclick="openVideo('video-lao-ho-2.mp4')">
-                                    <i class="fa-solid fa-play"></i> Xem Video
-                                </button>
-                            </td>
-                        </tr>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 10%; text-align: center;">STT</th>
+                        <th style="width: 70%;"><i class="fa-solid fa-yin-yang"></i> Tên Bài Quyền / Tên Kĩ Thuật</th>
+                        <th style="width: 20%; text-align: center;"><i class="fa-solid fa-link"></i> Chi Tiết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center; font-weight: bold;">1</td>
+                        <td style="font-weight: 500; font-size: 1.1rem; color: var(--primary-color);">Lão Hổ Thượng Sơn</td>
+                        <td style="text-align: center;">
+                            <a href="https://lelevietnam99.github.io/A1-LAOHOTHUONGSON/" class="detail-btn">
+                                <i class="fa-solid fa-eye"></i> Xem Chi Tiết
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center; font-weight: bold;">2</td>
+                        <td style="font-weight: 500; font-size: 1.1rem; color: var(--primary-color);">Thái Sơn Côn</td>
+                        <td style="text-align: center;">
+                            <a href="#" class="detail-btn">
+                                <i class="fa-solid fa-eye"></i> Xem Chi Tiết
+                            </a>
+                        </td>
+                    </tr>
                     </tbody>
-                </table>
-            </div>
+            </table>
         </div>
 
-        <div class="quan-form-section">
-            <div class="quan-title">
-                <i class="fa-solid fa-yin-yang"></i> Bài Quyền: Thái Sơn Côn
-            </div>
-            
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 10%; text-align: center;">STT</th>
-                            <th style="width: 70%;"><i class="fa-solid fa-scroll"></i> Tên Lời Thiệu</th>
-                            <th style="width: 20%; text-align: center;"><i class="fa-solid fa-film"></i> Video</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="text-align: center; font-weight: bold;">1</td>
-                            <td style="font-weight: 500; font-size: 1.1rem; color: var(--primary-color);">1.Thái sơn,trích thủy,địa xà liên</td>
-                            <td style="text-align: center;">
-                                <button class="video-btn" onclick="openVideo('video-thai-son-1.mp4')">
-                                    <i class="fa-solid fa-play"></i> Xem Video
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-
-    <div id="videoModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeVideo()">&times;</span>
-            <video id="modalVideo" controls>
-                <source id="videoSource" src="" type="video/mp4">
-                Trình duyệt của bạn không hỗ trợ thẻ video.
-            </video>
-        </div>
     </div>
 
     <footer>
         <p>&copy; 2026 Môn Phái PQQ - Ban Chuyên Môn</p>
     </footer>
-
-    <script>
-        var modal = document.getElementById("videoModal");
-        var videoElement = document.getElementById("modalVideo");
-        var sourceElement = document.getElementById("videoSource");
-
-        // Hàm mở popup và chạy video
-        function openVideo(videoFile) {
-            sourceElement.src = videoFile;
-            videoElement.load(); // Tải lại video mới
-            modal.style.display = "flex"; // Hiển thị khung đen
-            videoElement.play(); // Tự động phát
-        }
-
-        // Hàm tắt popup và dừng video
-        function closeVideo() {
-            modal.style.display = "none"; // Ẩn khung đen
-            videoElement.pause(); // Dừng video
-            sourceElement.src = ""; // Xóa nguồn để dừng hẳn quá trình tải
-        }
-
-        // Bấm ra vùng đen bên ngoài cũng tắt được video
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeVideo();
-            }
-        }
-    </script>
 
 </body>
 </html>
