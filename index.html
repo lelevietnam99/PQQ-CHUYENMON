@@ -58,6 +58,40 @@
             flex-grow: 1;
         }
 
+        /* --- Bổ sung CSS cho thanh tìm kiếm --- */
+        .search-container {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-container i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+
+        .search-container input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 1.05rem;
+            color: var(--text-color);
+            background: transparent;
+            font-family: inherit;
+        }
+
+        .search-container input::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+        /* -------------------------------------- */
+
         /* Bảng hiển thị */
         .table-container {
             background-color: var(--card-bg);
@@ -113,6 +147,16 @@
             background-color: #922b21;
         }
 
+        /* Thông báo khi không tìm thấy kết quả */
+        #no-results {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: var(--primary-color);
+            font-style: italic;
+            font-weight: 500;
+        }
+
         footer {
             width: 100%;
             background-color: var(--primary-color);
@@ -133,8 +177,13 @@
 
     <div class="container">
         
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Nhập tên bài quyền hoặc kĩ thuật cần tìm...">
+        </div>
+
         <div class="table-container">
-            <table>
+            <table id="quanTable">
                 <thead>
                     <tr>
                         <th style="width: 10%; text-align: center;">STT</th>
@@ -143,26 +192,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr class="item-row">
                         <td style="text-align: center; font-weight: bold;">1</td>
-                        <td style="font-weight: 500; font-size: 1.1rem; color: var(--primary-color);">Lão Hổ Thượng Sơn</td>
+                        <td style="font-weight: 500; font-size: 1.1rem; color: var(--primary-color);" class="item-name">Lão Hổ Thượng Sơn</td>
                         <td style="text-align: center;">
                             <a href="https://lelevietnam99.github.io/A1-LAOHOTHUONGSON/" class="detail-btn">
                                 <i class="fa-solid fa-eye"></i> Xem Chi Tiết
                             </a>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="item-row">
                         <td style="text-align: center; font-weight: bold;">2</td>
-                        <td style="font-weight: 500; font-size: 1.1rem; color: var(--primary-color);">Thái Sơn Côn</td>
+                        <td style="font-weight: 500; font-size: 1.1rem; color: var(--primary-color);" class="item-name">Hùng Kê Quyền</td>
                         <td style="text-align: center;">
-                            <a href="#" class="detail-btn">
+                            <a href="https://lelevietnam99.github.io/A1-HUNGKEQUYEN/" class="detail-btn">
                                 <i class="fa-solid fa-eye"></i> Xem Chi Tiết
                             </a>
                         </td>
                     </tr>
-                    </tbody>
+                </tbody>
             </table>
+            <div id="no-results">Không tìm thấy bài quyền/kĩ thuật nào phù hợp.</div>
         </div>
 
     </div>
@@ -171,5 +221,37 @@
         <p>&copy; 2026 Môn Phái PQQ - Ban Chuyên Môn</p>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const rows = document.querySelectorAll('.item-row');
+            const noResultsDiv = document.getElementById('no-results');
+
+            searchInput.addEventListener('input', function(e) {
+                // Lấy từ khóa, chuyển về chữ thường và xóa khoảng trắng thừa
+                const searchTerm = e.target.value.toLowerCase().trim();
+                let hasResults = false;
+
+                rows.forEach(row => {
+                    // Cột chứa tên bài quyền có class là item-name
+                    const itemName = row.querySelector('.item-name').textContent.toLowerCase();
+                    
+                    if (itemName.includes(searchTerm)) {
+                        row.style.display = ''; // Hiện dòng nếu khớp
+                        hasResults = true;
+                    } else {
+                        row.style.display = 'none'; // Ẩn dòng nếu không khớp
+                    }
+                });
+
+                // Hiển thị thông báo nếu không có dòng nào khớp
+                if (hasResults) {
+                    noResultsDiv.style.display = 'none';
+                } else {
+                    noResultsDiv.style.display = 'block';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
